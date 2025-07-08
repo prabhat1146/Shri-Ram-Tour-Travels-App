@@ -1,13 +1,15 @@
 import React from 'react';
 import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { companyAddress1, companyAddress2, companyAddress3, companyEmail1, companyName, companyPhone1, companyPhone2 } from '../utils/NameString';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer className="bg-yellow-100 text-yellow-900 py-10 ">
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Company Info */}
         <div>
-          <h2 className="text-xl font-bold mb-2">Shri Ram Tour & Travels</h2>
+          <h2 className="text-xl font-bold mb-2">{companyName}</h2>
           <p className="text-sm">
             Providing comfortable, affordable, and spiritual travel experiences across India.
           </p>
@@ -18,15 +20,28 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-2">Contact Us</h3>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
-              <Phone size={16} /> +91 9876543210
+              <Phone size={16} /> {companyPhone1}
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={16} /> contact@shriramtravels.com
+              <Phone size={16} /> {companyPhone2}
             </li>
             <li className="flex items-center gap-2">
-              <MapPin size={16} /> Ayodhya, Uttar Pradesh, India
+              <Mail size={16} /> {companyEmail1}
+            </li>
+            <li className="flex items-center gap-2">
+              <MapPin size={16} /> {companyAddress1} <br /> {companyAddress2} <br /> {companyAddress3}
             </li>
           </ul>
+        </div>
+
+        <div>
+          <ul>
+
+          <li><Link to={'/pages/legal/privacy-and-policy'}>Privacy & Policy</Link></li>
+          <li><Link to={'/pages/legal/terms-and-conditions'}>Terms & Conditions</Link></li>
+          <li><Link to={'/pages/legal/disclaimer'}>Disclaimer</Link></li>
+          </ul>
+          
         </div>
 
         {/* Social Links */}
@@ -44,7 +59,7 @@ const Footer = () => {
       </div>
 
       <div className="text-center text-xs text-yellow-700 mt-8">
-        © {new Date().getFullYear()} Shri Ram Tour & Travels. All rights reserved.
+        © {new Date().getFullYear()} {companyName}. All rights reserved.
       </div>
     </footer>
   );

@@ -1,5 +1,6 @@
 import React from "react";
-import { MapPin, Landmark, Navigation, Compass } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { MapPin, Landmark } from "lucide-react";
 
 const destinations = [
   {
@@ -75,6 +76,12 @@ const destinations = [
 ];
 
 const Destination = () => {
+  const navigate = useNavigate();
+
+  const handleExplore = (locationName) => {
+    navigate(`/packages?location=${encodeURIComponent(locationName)}`);
+  };
+
   return (
     <div className="min-h-screen bg-yellow-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
@@ -86,20 +93,26 @@ const Destination = () => {
           {destinations.map((dest) => (
             <div
               key={dest.id}
-              className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition"
+              className="bg-white shadow-md hover:shadow-lg rounded-lg p-6 transition duration-300"
             >
               <h2 className="text-2xl font-semibold text-yellow-700 mb-2 flex items-center gap-2">
                 <Landmark size={20} className="text-yellow-600" />
                 {dest.name}
               </h2>
+
               <div className="flex items-center text-sm text-gray-700 mb-2">
                 <MapPin size={16} className="text-yellow-600 mr-1" />
                 {dest.state}
               </div>
+
               <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                 {dest.description}
               </p>
-              <button className="w-full py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700">
+
+              <button
+                className="w-full py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition"
+                onClick={() => handleExplore(dest.name)}
+              >
                 Explore
               </button>
             </div>

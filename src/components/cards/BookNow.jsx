@@ -28,42 +28,46 @@ const BookNow = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Simulate API request — replace with fetch("/api/book", {...})
-    setTimeout(() => {
+    // Simulate real API call — replace with your POST API
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500)); // simulate delay
       setSuccess(true);
-      setSubmitting(false);
 
-      // Optionally redirect or reset
       setTimeout(() => {
         navigate("/");
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error("Booking failed", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-yellow-50 py-16 px-4">
-      <div className="max-w-xl mx-auto bg-white shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-yellow-700 mb-4 text-center">
-          Book Now
+      <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-xl p-8">
+        <h2 className="text-3xl font-bold text-yellow-700 mb-6 text-center">
+          Book This Tour
         </h2>
 
         {selectedPackage ? (
-          <div className="bg-yellow-100 text-yellow-900 p-4 mb-6 rounded-md">
-            <p>
-              Booking for: <strong>{selectedPackage.name}</strong>
-            </p>
-            <p className="text-sm text-gray-700">{selectedPackage.duration} – ₹{selectedPackage.price}</p>
+          <div className="bg-yellow-100 text-yellow-900 p-4 mb-6 rounded-md border border-yellow-300">
+            <h3 className="text-lg font-semibold mb-1">{selectedPackage.name}</h3>
+            <p className="text-sm mb-1">{selectedPackage.duration} • ₹{selectedPackage.price}</p>
+            <p className="text-gray-700 text-sm italic">{selectedPackage.shortDescription}</p>
           </div>
         ) : (
-          <div className="text-red-600 mb-4">No package selected</div>
+          <div className="text-red-600 mb-4 text-center font-semibold">
+            No tour package selected for booking.
+          </div>
         )}
 
         {success ? (
           <div className="text-green-600 text-center font-semibold">
-            ✅ Booking confirmed! You’ll be redirected shortly...
+            ✅ Booking confirmed! Redirecting you shortly...
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <input
               type="text"
               name="name"
@@ -88,6 +92,7 @@ const BookNow = () => {
               type="tel"
               name="phone"
               placeholder="Phone Number"
+              pattern="[0-9]{10}"
               className="w-full p-3 border rounded-md"
               value={formData.phone}
               onChange={handleChange}
@@ -97,8 +102,8 @@ const BookNow = () => {
             <input
               type="number"
               name="travelers"
-              placeholder="Number of Travelers"
               min="1"
+              placeholder="Number of Travelers"
               className="w-full p-3 border rounded-md"
               value={formData.travelers}
               onChange={handleChange}
@@ -116,8 +121,12 @@ const BookNow = () => {
 
             <button
               type="submit"
-              className="w-full bg-yellow-600 text-white py-3 rounded-md hover:bg-yellow-700 transition"
               disabled={submitting}
+              className={`w-full py-3 rounded-md text-white text-lg shadow transition ${
+                submitting
+                  ? "bg-yellow-400 cursor-not-allowed"
+                  : "bg-yellow-600 hover:bg-yellow-700"
+              }`}
             >
               {submitting ? "Booking..." : "Confirm Booking"}
             </button>
