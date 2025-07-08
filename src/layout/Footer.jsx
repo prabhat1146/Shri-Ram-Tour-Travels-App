@@ -35,6 +35,8 @@ const Footer = () => {
         </div>
 
         <div>
+
+           <h3 className="text-lg font-semibold mb-2">Legal</h3>
           <ul>
 
           <li><Link to={'/pages/legal/privacy-and-policy'}>Privacy & Policy</Link></li>
