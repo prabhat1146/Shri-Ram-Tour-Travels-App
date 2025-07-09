@@ -1,5 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const BookNow = () => {
   const location = useLocation();
@@ -16,28 +19,48 @@ const BookNow = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setErrorMsg("");
 
-    // Simulate real API call — replace with your POST API
+    if (!selectedPackage) {
+      setErrorMsg("No tour package selected.");
+      setSubmitting(false);
+      return;
+    }
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // simulate delay
-      setSuccess(true);
+      const suburl = `${serverUrl}/api/v1/user/booking/book-now`;
+      const payload = { ...formData, packageId: selectedPackage._id };
+      console.log(suburl)
+      console.log(payload)
+      console.log(serverUrl)
+      
+      const res = await axios.post(suburl, payload);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
+      if (res.status === 200 || res.status === 201) {
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      } else {
+        setErrorMsg("Booking failed. Please try again.");
+      }
     } catch (error) {
-      console.error("Booking failed", error);
+      const message =
+        error.response?.data?.message || "Server error. Please try later.";
+      setErrorMsg(message);
     } finally {
       setSubmitting(false);
     }
@@ -52,13 +75,25 @@ const BookNow = () => {
 
         {selectedPackage ? (
           <div className="bg-yellow-100 text-yellow-900 p-4 mb-6 rounded-md border border-yellow-300">
-            <h3 className="text-lg font-semibold mb-1">{selectedPackage.name}</h3>
-            <p className="text-sm mb-1">{selectedPackage.duration} • ₹{selectedPackage.price}</p>
-            <p className="text-gray-700 text-sm italic">{selectedPackage.shortDescription}</p>
+            <h3 className="text-lg font-semibold mb-1">
+              {selectedPackage.name}
+            </h3>
+            <p className="text-sm mb-1">
+              {selectedPackage.duration} • ₹{selectedPackage.price}
+            </p>
+            <p className="text-gray-700 text-sm italic">
+              {selectedPackage.shortDescription}
+            </p>
           </div>
         ) : (
           <div className="text-red-600 mb-4 text-center font-semibold">
             No tour package selected for booking.
+          </div>
+        )}
+
+        {errorMsg && (
+          <div className="text-red-600 text-center mb-4 font-medium">
+            ❌ {errorMsg}
           </div>
         )}
 
