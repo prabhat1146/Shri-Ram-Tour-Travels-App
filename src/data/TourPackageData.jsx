@@ -20,7 +20,7 @@ const TourPackageDatas = [
     price: 56000,
     rating: 4.7,
     shortDescription:
-      "Book budget-friendly Nainital–Jim Corbett–Mussoorie Tour Package with Lakshya Cabs. Explore hills, wildlife, and nature.",
+      "Book budget-friendly Nainital–Jim Corbett–Mussoorie Tour Package with shri ram tour and travels. Explore hills, wildlife, and nature.",
     description: `
     Explore the captivating sights of Uttarakhand through this 5 Nights 6 Days package. Visit scenic lakes of Nainital, enjoy thrilling safaris in Jim Corbett, and unwind in the serene landscapes of Mussoorie. Includes reliable transportation, comfortable stays, and an unforgettable hill station experience.
   `,
@@ -81,7 +81,7 @@ const TourPackageDatas = [
     price: 95000,
     rating: 4.9,
     shortDescription:
-      "Book an affordable Char Dham Yatra tour to Yamunotri, Gangotri, Kedarnath, and Badrinath from Lakshya Cabs.",
+      "Book an affordable Char Dham Yatra tour to Yamunotri, Gangotri, Kedarnath, and Badrinath from shri ram tour and travels.",
     description: `
     This Char Dham Yatra package offers a spiritually fulfilling 9-night, 10-day pilgrimage to Yamunotri, Gangotri, Kedarnath, and Badrinath. Enjoy safe travel, comfortable hotels, and ample time for prayer. The journey starts from Haridwar and includes all essential amenities for a stress-free and divine tour.
   `,
@@ -138,7 +138,7 @@ const TourPackageDatas = [
   shortDescription:
     "Spiritual tour covering the sacred cities of Varanasi, Prayagraj, and Ayodhya with seamless travel and temple visits.",
   description:
-    "Experience a divine 4-day journey across the holy cities of Varanasi, Prayagraj, and Ayodhya. From Ganga Aarti to Ram Janmabhoomi, this tour ensures spiritual immersion, historical exploration, and comfortable travel with Lakshya Cabs.",
+    "Experience a divine 4-day journey across the holy cities of Varanasi, Prayagraj, and Ayodhya. From Ganga Aarti to Ram Janmabhoomi, this tour ensures spiritual immersion, historical exploration, and comfortable travel with shri ram tour and travels.",
   vehicles: ["Dzire or Similar", "Ertiga or Similar", "Innova Crysta"],
   itinerary: [
     "Day 1: Arrival in Varanasi – Dashashwamedh Ghat Ganga Aarti",
